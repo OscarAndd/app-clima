@@ -1,5 +1,5 @@
 //rfc
-import React, { useContext } from 'react'
+import React, { useContext,useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { ThemeContext } from './ThemeProvider';
 import { BusquedaContext } from './BusquedaContext';
