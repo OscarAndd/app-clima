@@ -30,7 +30,7 @@ export default function CdetallesClima() {
             try {
                 if (ciudad) {
                     // console.log("LLAMADO API POR CIUDAD")
-                    const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=7607b0dab6ec4bab85b164258251102&q=${ciudad}`); // Reemplaza con la URL de tu API
+                    const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=7607b0dab6ec4bab85b164258251102&q=${ciudad}`); // Reemplaza con la URL de tu API
                     
                     if (!response.ok) {
                         throw new Error('Ciudad Ingresada no valida');
