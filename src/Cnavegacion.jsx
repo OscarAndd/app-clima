@@ -7,7 +7,7 @@ import Cbuscar from './Cbuscar';
 export default function Navegacion() {
     
     const { isClicked, toggleDarkMode } = useContext(ThemeContext);
-
+    const navbarCollapseRef = useRef(null);
     function darkmode() {
         let result = isClicked ? 'darktext' : 'daytext';
         return result;
@@ -16,6 +16,24 @@ export default function Navegacion() {
         let result = isClicked ? 'darkicon' : 'dayicon';
         return result;
     }
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (navbarCollapseRef.current && !navbarCollapseRef.current.contains(event.target)) {
+            const bsCollapse = new window.bootstrap.Collapse(navbarCollapseRef.current, {
+              toggle: false
+            });
+            bsCollapse.hide();
+          }
+        };
+    
+        document.addEventListener('click', handleClickOutside);
+    
+        return () => {
+          document.removeEventListener('click', handleClickOutside);
+        };
+      }, []);
+
     return (
         <div>
             <nav className="navbar navbar-expand-sm bg-secondary w-100 fixed-top" >
@@ -34,7 +52,7 @@ export default function Navegacion() {
                             <span className={`navbar-toggler-icon ${darkmodeicon()}`} />
                         </button>
                     </div>
-                    <div className="collapse navbar-collapse" id="collapsibleNavId">
+                    <div className="collapse navbar-collapse" id="collapsibleNavId" ref={navbarCollapseRef}>
                         <ul className="navbar-nav me-auto ms-0 ms-sm-3 pb-1">
                             <li className="nav-item me-3">
                             <Link className={`nav-link fs-3  mx-sm-0 mx-md-3 mx-lg-4 px-sm-0 text-decoration-underline ${darkmode()}`} to="/">
